@@ -1,0 +1,67 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const pageTitle = "ABOUT 💭";
+
+const identity = {
+    firstName: "とみなが",
+    country: "日本",
+    occupation: "web関係",
+    hobbies: ["ピアノ", "散歩", "カラオケ"],
+};
+
+const skills = ["HTML", "CSS", "JavaScript（勉強中）", ];
+
+const happy = true;
+const finished = false;
+const goal = 3;
+
+const skillColor = "navy";
+const fontweight = "bold";
+const textCase = "uppercase";
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{pageTitle}</title>
+        <style define:vars={{skillColor, fontweight, textCase,}}>
+            h1{
+                color: purple;
+                font-size: 4rem;
+            }
+            .skill{
+                color: var(--skillColor);
+                font-weight: var(--fontweight);
+                text-transform: var(--textCase);
+            }
+        </style>
+	</head>
+	<BaseLayout pageTitle={pageTitle}>
+        <h2>指宿について</h2>
+        <p>指宿市は、鹿児島県薩摩半島の南端にある市です。</p>
+        <p>人口は、約4万人です。 </p>
+        <p>観光促進と冷房節約の観点から、毎年4月下旬に行われる市長の「アロハ宣言」から10月末まで市職員・銀行職員などがアロハシャツを公用服として着用します。</p>
+
+        <h2>筆者の情報</h2>
+        <p>以下は、私に関するいくつかの事実です。</p>
+        <ul>
+            <li>私の名前は、{identity.firstName}です。</li>
+            <li>{identity.country}に住んでおり、{identity.occupation}の仕事をしています。</li>
+            {identity.hobbies.length >= 2 &&
+            <li>私のふたつの趣味は、{identity.hobbies[0]}と{identity.hobbies[1]}です。</li>
+            }
+        </ul>
+        <p>私のスキルは以下の通りです。</p>
+        <ul>
+            {skills.map((skill) => <li class="skill">{skill}</li>)}
+        </ul>
+
+        {happy && <p>Astroを学べて幸せです！</p>}
+        {finished && <p>私は、Astroの学習を終了しました！</p>}
+        {goal === 3 ? <p>3日で終えるのが目標です。</p>: <p>3日が目標ではありません。</p>}
+    </BaseLayout>
+

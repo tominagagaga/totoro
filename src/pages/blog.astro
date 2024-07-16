@@ -1,0 +1,25 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import BlogPost from "../components/Blogpost.astro"
+const allPosts = await Astro.glob("../pages/posts/*.md");
+const pageTitle = "BLOG ✍️";
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{pageTitle}</title>
+	</head>
+<BaseLayout pageTitle={pageTitle}>
+        <h2>指宿ブログ</h2>
+        <p>指宿のおすすめの場所や、イベントについて書きます！</p>
+        <ul>
+            {allPosts.map((post) => 
+            <BlogPost url={post.url} title={post.frontmatter.title}/>
+        )}
+          </ul>
+</BaseLayout>
+
